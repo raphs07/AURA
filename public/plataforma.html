@@ -1,329 +1,516 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <title>Plataforma AURA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="pages.css">
+    <title>Aura Map</title>
 
-  <!-- FONTES -->
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+    >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap"
-  rel="stylesheet">
-
-  <!-- ÍCONES -->
-
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="map.css">
 
 </head>
 
 <body>
 
-  <!-- HERO -->
+<div class="location-popup" id="locationPopup">
 
-  <section class="hero-page">
+    <div class="location-box">
 
-    <div class="hero-content">
+        <h2 class="location-title">
 
-      <span class="tag">
-        Plataforma Inteligente de Segurança
-      </span>
+            Olá! Estamos muito felizes que voce esta usando o AURA 🤩😉!
 
-      <h1>
-        Segurança feminina com tecnologia e elegância.
-      </h1>
-
-      <p>
-        AURA é uma plataforma desenvolvida para oferecer
-        mais segurança, suporte e autonomia através de
-        tecnologia inteligente e experiências modernas.
-      </p>
-
-      <div class="hero-buttons">
-
-        <a href="#funcionalidades">
-
-          <button class="gold-btn">
-            Conhecer Recursos
-          </button>
-
-        </a>
-
-      </div>
-
-    </div>
-
-    <div class="phone">
-
-      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200&auto=format&fit=crop">
-
-    </div>
-
-  </section>
-
-  <!-- SOBRE -->
-
-  <section class="about">
-
-    <div class="about-container">
-
-      <div class="about-text">
-
-        <span class="tag">
-          Sobre a Plataforma
-        </span>
-
-        <h2>
-          Tecnologia desenvolvida para proteger,
-          conectar e transformar experiências.
         </h2>
 
-        <p>
-          AURA é uma plataforma inteligente criada para oferecer
-          mais segurança, autonomia e tranquilidade para mulheres
-          através da tecnologia e da inovação.
+        <p class="location-text">
+
+            Antes de começarmos,
+            precisamos ter acesso a sua localização
+
         </p>
 
-        <p>
-          O projeto combina Inteligência Artificial,
-          monitoramento inteligente e recursos modernos
-          para auxiliar na prevenção de riscos e no suporte
-          em situações de emergência.
-        </p>
+        <button
+        class="location-button"
+        id="allowAlways"
+        >
+
+            Permitir acesso a localização apenas durante o uso do site
+
+        </button>
+
+        <button
+        class="location-button"
+        id="allowOnce"
+        >
+
+            Permitir acesso a localização apenas dessa vez
+
+        </button>
+
+        <button
+        class="location-button deny-button"
+        id="denyLocation"
+        >
+
+            Não permitir acesso a localização
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="blocked-screen hidden" id="blockedScreen">
+
+    <div class="blocked-content">
+
+        <div class="blocked-icon">
+            ⚠
+        </div>
+
+        <h1>
+            Desculpe
+        </h1>
 
         <p>
-          Além da proteção em tempo real, a plataforma também
-          busca fortalecer redes de apoio, conectar usuárias
-          e criar experiências mais seguras e acolhedoras.
+
+            Não conseguimos rodar o site
+            sem sua localização :(
+
         </p>
 
-      </div>
+    </div>
 
-      <div class="about-info">
+</div>
 
-        <div class="info-card">
+    <div class="topbar">
 
-          <i class="fa-solid fa-shield-heart"></i>
+        <div class="logo">
+            ✦ Aura Map
+        </div>
 
-          <div>
+        <div class="profile-button" id="profileButton">
 
-            <h3>
-              Segurança Inteligente
-            </h3>
+            <div class="profile-icon">
+
+                <div class="profile-head"></div>
+
+                <div class="profile-body"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="map"></div>
+
+    <div class="map-legend">
+        🟢 Segura <br>
+        🟡 Atenção <br>
+        🔴 Evitar
+    </div>
+
+    <div class="side-panel" id="sidePanel">
+
+        <div class="toggle-button" id="toggleButton">
+            <span id="arrow"><</span>
+        </div>
+
+        <div class="panel-content">
+
+          <div id="mainPanelContent">
+
+    
+
+    <button class="sos-button" id="sosButton">
+
+        ☎ Chamada de Emergencia
+
+    </button>
+
+    <textarea
+class="route-input"
+id="routeInput"
+placeholder="Digite aqui a rota que voce deseja pegar"
+></textarea>
+
+<button
+class="route-button"
+id="showComments"
+>
+
+    Clique aqui para ver os comentarios sobre essa rota
+
+</button>
+
+</div>
+
+<div class="site-comments-area">
+
+    <button
+class="open-review-panel"
+id="openReviewPanel"
+>
+
+    ✨ Clique aqui para avaliar o AURA
+
+</button>
+
+    <div class="site-comments-box">
+
+        <div class="site-comment-card">
+
+            <div class="site-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
 
             <p>
-              Recursos modernos para monitoramento e prevenção.
+                Estou amando usar o Aura Map, me sinto muito mais segura!
             </p>
-
-          </div>
 
         </div>
 
-        <div class="info-card">
+        <div class="site-comment-card">
 
-          <i class="fa-solid fa-location-dot"></i>
-
-          <div>
-
-            <h3>
-              Rotas Mais Seguras
-            </h3>
+            <div class="site-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
 
             <p>
-              Sugestão inteligente de trajetos com menor risco.
+                O visual do aplicativo e lindo e muito delicado.
             </p>
-
-          </div>
 
         </div>
 
-        <div class="info-card">
+        <div class="site-comment-card">
 
-          <i class="fa-solid fa-users"></i>
-
-          <div>
-
-            <h3>
-              Rede de Apoio
-            </h3>
+            <div class="site-stars">
+                ⭐⭐⭐⭐
+            </div>
 
             <p>
-              Conexão com comunidades e espaços parceiros.
+                Gostei bastante das avaliacoes das rotas, ajuda muito.
             </p>
 
-          </div>
+        </div>
+
+        <div class="site-comment-card">
+
+            <div class="site-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
+
+            <p>
+                Finalmente um aplicativo pensado para seguranca feminina.
+            </p>
 
         </div>
 
-      </div>
+        <div class="site-comment-card">
 
-    </div>
+            <div class="site-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
 
-  </section>
+            <p>
+                O botao SOS passa muita confianca, adorei a ideia!
+            </p>
 
-  <!-- FUNCIONALIDADES -->
-
-  <section class="features" id="funcionalidades">
-
-    <div class="title">
-
-      <h2>
-        Recursos da Plataforma
-      </h2>
-
-      <p>
-        Funcionalidades desenvolvidas para proporcionar
-        uma experiência moderna, intuitiva e segura.
-      </p>
-
-    </div>
-
-    <div class="cards">
-
-      <div class="card">
-
-        <div class="icon">
-          <i class="fa-solid fa-microchip"></i>
         </div>
 
-        <h3>
-          Inteligência Artificial
-        </h3>
+    </div>
 
-        <p>
-          Sistema inteligente capaz de identificar situações
-          de risco e oferecer suporte preventivo.
-        </p>
+</div>
 
-      </div>
+<div class="hidden" id="reviewPanel">
 
-      <div class="card">
+    <div class="review-header">
 
-        <div class="icon">
-          <i class="fa-solid fa-bell"></i>
-        </div>
+        <button
+        class="review-close"
+        id="closeReviewPanel"
+        >
 
-        <h3>
-          Alertas em Tempo Real
-        </h3>
+            X
 
-        <p>
-          Receba notificações e avisos importantes
-          durante seus trajetos.
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="icon">
-          <i class="fa-solid fa-map-location-dot"></i>
-        </div>
-
-        <h3>
-          Safe Zones
-        </h3>
-
-        <p>
-          Identificação de locais parceiros considerados
-          pontos seguros para apoio.
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="icon">
-          <i class="fa-solid fa-mobile-screen-button"></i>
-        </div>
-
-        <h3>
-          Aplicativo Integrado
-        </h3>
-
-        <p>
-          Integração completa com o futuro aplicativo AURA
-          para acompanhamento inteligente.
-        </p>
-
-      </div>
+        </button>
 
     </div>
 
-  </section>
+    <div class="review-box">
 
-  <!-- EXPERIÊNCIA -->
+        <div class="review-stars">
 
-  <section class="experience">
+            <span class="star" data-value="1">
+                ★
+            </span>
 
-    <div class="experience-text">
+            <span class="star" data-value="2">
+                ★
+            </span>
 
-      <span class="tag">
-        Experiência Exclusiva
-      </span>
+            <span class="star" data-value="3">
+                ★
+            </span>
 
-      <h2>
-        Um design delicado e moderno.
-      </h2>
+            <span class="star" data-value="4">
+                ★
+            </span>
 
-      <p>
-        AURA foi desenvolvida com uma experiência visual elegante,
-        intuitiva e acolhedora para tornar a navegação
-        mais confortável e sofisticada.
-      </p>
+            <span class="star" data-value="5">
+                ★
+            </span>
 
-      <ul>
+        </div>
 
-        <li>✔ Interface moderna</li>
-        <li>✔ Navegação intuitiva</li>
-        <li>✔ Visual elegante</li>
-        <li>✔ Recursos inteligentes</li>
+        <textarea
+        id="reviewText"
+        class="review-text"
+        placeholder="Escreva aqui o que voce esta achando do AURA"
+        ></textarea>
 
-      </ul>
+        <button
+        class="send-review"
+        id="sendReview"
+        >
+
+            Enviar
+
+        </button>
 
     </div>
 
-    <div class="mockups">
+</div>
 
-      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+<div class="hidden" id="commentsScreen">
 
-      <img src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=1200&auto=format&fit=crop">
+    <div class="comments-header">
 
-    </div>
+    <button
+    class="comments-close"
+    id="closeCommentsX"
+    >
 
-  </section>
+        X
 
-  <!-- CTA -->
+    </button>
 
-  <section class="cta">
+</div>
 
-    <h2>
-      O futuro da segurança feminina começa agora.
+    <h2 class="comments-title">
+
+        Comentarios da rota
+
     </h2>
 
-    <p>
-      Faça parte da nova geração de tecnologia inteligente.
+    <div class="comment-box">
+
+        <div class="stars">
+            ⭐⭐⭐⭐⭐
+        </div>
+
+        <p>
+            Rota muito segura e tranquila, gostei bastante!
+        </p>
+
+    </div>
+
+    <div class="comment-box">
+
+        <div class="stars">
+            ⭐⭐⭐
+        </div>
+
+        <p>
+            A rota e razoavel, mas algumas ruas sao pouco iluminadas.
+        </p>
+
+    </div>
+
+    <div class="comment-box">
+
+        <div class="stars">
+            ⭐
+        </div>
+
+        <p>
+            Nao gostei muito dessa rota, achei perigosa durante a noite.
+        </p>
+
+    </div>
+
+    <button
+    class="cancel-button"
+    id="closeComments"
+    >
+
+        Voltar
+
+    </button>
+
+</div>
+
+<div class="hidden" id="sosScreen">
+
+    <div class="sos-icon">
+        ☎
+    </div>
+
+    <h2 class="sos-title">
+        Chamada de emergencia em andamento
+    </h2>
+
+    <p class="sos-text">
+
+        Por favor aguarde e tente se manter calma!!
+
+        <br><br>
+
+        Enviamos sua localizacao para a emergencia!!
+
     </p>
 
-    <a href="index.html">
+    <button class="cancel-button" id="cancelSos">
 
-      <button class="gold-btn">
-        Voltar ao Site
-      </button>
+        Cancelar
 
-    </a>
+    </button>
 
-  </section>
+</div>
+
+        </div>
+
+    </div>
+
+    <div class="profile-panel hidden" id="profilePanel">
+
+        <div class="panel-header">
+
+            <button class="close-btn" id="closeProfile">
+                X
+            </button>
+
+        </div>
+
+        <div class="profile-area">
+
+            <div class="big-profile" id="changePhoto">
+
+                <div class="big-head"></div>
+
+                <div class="big-body"></div>
+
+            </div>
+
+            <p class="photo-text">
+                Alterar foto
+            </p>
+
+            <h1 id="userName">
+                Nome do usuario
+            </h1>
+
+            <button class="edit-name" id="editName">
+                ✎
+            </button>
+
+        </div>
+
+        <div class="menu-options">
+
+    <button
+    class="profile-menu-button"
+    id="favoriteRoutes"
+    >
+
+        ⭐ Rotas favoritadas
+
+    </button>
+
+    <button
+    class="profile-menu-button"
+    id="reviews"
+    >
+
+        💬 Avaliacoes realizadas
+
+    </button>
+
+    <button
+    class="profile-menu-button"
+    id="info"
+    >
+
+        ❔ Informacoes
+
+    </button>
+
+</div>
+
+    </div>
+
+    <div class="sub-panel hidden" id="subPanel">
+
+        <div class="panel-header">
+
+            <button class="close-btn" id="closeSubPanel">
+                X
+            </button>
+
+        </div>
+
+        <div class="sub-content" id="subContent"></div>
+
+    </div>
+
+    <div class="edit-panel hidden" id="editPanel">
+
+        <div class="panel-header">
+
+            <button class="close-btn" id="closeEditPanel">
+                X
+            </button>
+
+        </div>
+
+        <div class="edit-content">
+
+            <h2>
+                Alterar nome
+            </h2>
+
+            <input
+            type="text"
+            id="nameInput"
+            placeholder="Digite o novo nome"
+            >
+
+            <button id="saveName">
+                Salvar
+            </button>
+
+        </div>
+
+    </div>
+
+    <link
+rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
