@@ -83,7 +83,7 @@ if (formUsuaria) {
     const senha = document.getElementById("senha").value;
     const telefoneInput = document.getElementById("telefone");
 
-      if (telefoneInput) { 
+      if (telefoneInput) {       
 
         telefoneInput.addEventListener("input", function(e) {
 
