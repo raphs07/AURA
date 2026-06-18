@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AURA | Criar Conta</title>
+
+<link rel="stylesheet" href="pages.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="form-page">
+
+<div class="form-box">
+
+<div class="step">
+1 de 2 • Tipo de Conta
+</div>
+
+<h1>Crie sua Conta</h1>
+
+<p>
+Escolha como deseja participar da comunidade AURA.
+</p>
+
+<div class="account-options">
+
+<button class="account-btn active" id="btnUsuaria">
+Sou Usuária
+</button>
+
+<button class="account-btn" id="btnParceiro">
+Sou Parceiro
+</button>
+
+</div>
+
+<form id="formUsuaria">
+
+<input type="text" id="nome" placeholder="Nome completo" required>
+
+<label class="form-label">
+Data de nascimento
+</label>
+
+<input
+type="date"
+id="data_nascimento"
+name="data_nascimento">
+
+<input type="email" id="email" placeholder="E-mail" required>
+
+<input
+    type="tel"
+    id="telefone"
+    name="telefone"
+    placeholder="(00) 00000-0000"
+    maxlength="15"
+    inputmode="numeric"
+    required
+>
+<small class="input-info">
+Formato: (DDD) 99999-9999
+</small>
+
+<input type="text" id="cidade" placeholder="Cidade">
+
+
+<select id="estado" name="estado" required>
+
+    <option value="">Selecione o Estado</option>
+
+    <option value="AC">Acre (AC)</option>
+    <option value="AL">Alagoas (AL)</option>
+    <option value="AP">Amapá (AP)</option>
+    <option value="AM">Amazonas (AM)</option>
+    <option value="BA">Bahia (BA)</option>
+    <option value="CE">Ceará (CE)</option>
+    <option value="DF">Distrito Federal (DF)</option>
+    <option value="ES">Espírito Santo (ES)</option>
+    <option value="GO">Goiás (GO)</option>
+    <option value="MA">Maranhão (MA)</option>
+    <option value="MT">Mato Grosso (MT)</option>
+    <option value="MS">Mato Grosso do Sul (MS)</option>
+    <option value="MG">Minas Gerais (MG)</option>
+    <option value="PA">Pará (PA)</option>
+    <option value="PB">Paraíba (PB)</option>
+    <option value="PR">Paraná (PR)</option>
+    <option value="PE">Pernambuco (PE)</option>
+    <option value="PI">Piauí (PI)</option>
+    <option value="RJ">Rio de Janeiro (RJ)</option>
+    <option value="RN">Rio Grande do Norte (RN)</option>
+    <option value="RS">Rio Grande do Sul (RS)</option>
+    <option value="RO">Rondônia (RO)</option>
+    <option value="RR">Roraima (RR)</option>
+    <option value="SC">Santa Catarina (SC)</option>
+    <option value="SP">São Paulo (SP)</option>
+    <option value="SE">Sergipe (SE)</option>
+    <option value="TO">Tocantins (TO)</option>
+
+</select>
+
+
+</select>
+
+<input type="password" id="senha" placeholder="Senha" required>
+
+<button type="submit" class="submit-btn">
+Criar Conta
+</button>
+
+</form>
+
+<form id="formParceiro" style="display:none;">
+
+<input type="text" id="empresa" placeholder="Nome da empresa" required>
+
+<input type="text" id="responsavel" placeholder="Responsável">
+
+<input type="email" id="emailParceiro" placeholder="E-mail corporativo">
+
+<input type="text" id="telefoneParceiro" placeholder="Telefone">
+
+<select id="segmento">
+
+<option>Selecione o segmento</option>
+
+<option>Tecnologia</option>
+
+<option>Educação</option>
+
+<option>Saúde</option>
+
+<option>Beleza</option>
+
+<option>Bem-estar</option>
+
+<option>Outros</option>
+
+</select>
+
+<textarea
+id="descricao"
+placeholder="Conte um pouco sobre sua empresa">
+</textarea>
+
+<button type="submit" class="submit-btn">
+Solicitar Parceria
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<h2 id="modalTitulo"></h2>
+
+<p id="modalTexto"></p>
+
+<button onclick="fecharModal()">
+Entendi
+</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

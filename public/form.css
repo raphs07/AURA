@@ -1,0 +1,52 @@
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#fff;
+  font-family:'Poppins', sans-serif;
+}
+
+.container{
+  width:400px;
+  background:#fff8fd;
+  padding:40px;
+  border-radius:30px;
+  border:1px solid #f4ddff;
+  box-shadow:0 10px 30px rgba(197,139,255,0.1);
+}
+
+h1{
+  text-align:center;
+  color:#8b5fbf;
+  margin-bottom:30px;
+  font-family:'Playfair Display', serif;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+input{
+  padding:16px;
+  border:none;
+  border-radius:15px;
+  background:#fdf1ff;
+}
+
+input:focus{
+  outline:2px solid #c58bff;
+}
+
+button{
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:#d4a017;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
